@@ -14,6 +14,6 @@ cleanpdf: clean
 
 
 backup: 
-	tar czvf ../everything-log.tar.gz ../everything-log/*.tex ../everything-log/*.pdf ../everything-log/sections/*
+	tar czvf ../everything-log.tar.gz ../everything-log/*.tex ../everything-log/*.pdf ../everything-log/sections/* ../everything-log/extraFiles/*
 
 tar:	backup
