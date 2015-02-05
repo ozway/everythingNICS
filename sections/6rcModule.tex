@@ -1,0 +1,7 @@
+The RC module is fairly straightforward.
+
+\verbatiminput{r/RC.c}
+
+Mostly what it does is set up the necessary environment, then calls the function Rf\_mainloop(). The IEL configuration file will have to have the information about where the R script is. The first argument in the args section of the configuration file must be the relative path to the R script that you are interested in running.
+
+The RC module currently doesn't use any tuple communication, and does not interact with other modules in any way. Fortunately, this should be easily remedied. R can use the .C() function to call just about any C function. Converting C datatypes to R datatypes should be somewhat of a challenge, but there shouldn't be many challenges beyond that. It should be a very direct process to compile any C libraries into the R library, or compile them as a separate library to be loaded into R.

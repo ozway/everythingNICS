@@ -1,0 +1,67 @@
+\subsection{Compiling PSUADE as a Module}
+\subsubsection{main in Psuade.cpp as a module}
+
+
+I recommend first copying over Psuade.cpp to PsuadeIEL.cpp, and making all of the relevant changes in that file. That way, you can still compile Psuade as a standalone software piece for data analysis and debugging, in addition to compliling the Psuade module library.
+
+If you choose to just modify Psuade.cpp, replace all instances of 'PsuadeIEL.cpp' below with 'Psuade.cpp'. The resulting library will be incapable of running PSUADE without the DIEL, because it will lack a main function.
+
+\begin{enumerate}
+
+	\item Add include files to PsuadeIEL.cpp
+
+\begin{verbatim}
+#include "../../../../iel-2.0/EXECUTIVE/HYBRID/IEL\_comm/IEL.h"
+#include "../../../../iel-2.0/EXECUTIVE/HYBRID/executive/IEL\_exec\_info.h"
+#include "../../../../iel-2.0/EXECUTIVE/HYBRID/IEL\_comm/tuple\_comm.h"
+#include "../../../../iel-2.0/EXECUTIVE/HYBRID/IEL\_comm/arrayList.h"
+\end{verbatim}
+
+
+	\item Change main(int argc, char** argv)  to PSUADEmain(IEL\_exec\_info\_t *exec\_info)
+
+%%	\item In Makefile.in, add to the end of PSUADE\_INCLUDE = -I\$(PSUADE\_DIR) -I\$(PSUADE\_DIR)/Include
+%%	
+%%~~~~ -I../../../../iel-2.0/EXECUTIVE/HYBRID/executive/
+%%
+%%~~~~ -I../../../../iel-2.0/EXECUTIVE/HYBRID/IEL\_comm/
+%5
+%%	\item When I initially call the CMAKE, I set the library path (to avoid catching user/bin/liblapack.so) and CMAKE\_CXX\_FLAGS to -DMPICH\_SKIP\_MPICXX
+%%
+%%	-DCMAKE\_LIBRARY\_PATH=\$(IEL\_HOME)/EXTLIB/LAPACK/lapack-3.4.0-shared/\\
+%%	and
+%%
+%%	-DCMAKE\_CXX\_FLAGS='-DMPICH\_SKIP\_MPICXX'
+
+	\item Add the following lines to CMakeLists.txt
+\begin{verbatim}
+SET(CMAKE_CXX_FLAGS "-DMPICH_SKIP_MPICXX")
+
+include_directories("../../../EXECUTIVE/HYBRID/executive/")
+include_directories("../../../EXECUTIVE/HYBRID/IEL_comm/")
+include_directories("../../MPICH/mpich-shared/include/")
+add_library (PsuadeModule ${LIBRARY_TYPE} "Src/Main/PsuadeIEL.cpp" ${psuade_SRC}
+    ${psuade_HDRS} ${PDF_SRC})
+\end{verbatim}
+
+(The add\_library command should be one line, but text wrapping makes it look like two   )
+
+\end{enumerate}
+
+\subsubsection{Passing command line arguments to PSUADE}
+
+Command line arguments should be passed through the argument by the cfg file.
+
+I added these lines to the PsuadeIEL.cpp file to get the arguments. PSUADE assumes that the first argument in argv is ``/path/to/psuade/psuade", so we put a filler argument in argv[0].
+
+\begin{verbatim}
+int argc = exec_info->modules[exec_info->module_num].mod_argc + 1;
+
+char* argv[argc];
+char* temporary = "PsuadeModule";
+argv[0] = temporary;
+int i=0;
+for(i=0; i<(argc-1); i++)
+    {    argv[i+1] = exec_info->modules[exec_info->module_num].mod_argv[i];    }
+\end{verbatim}
+

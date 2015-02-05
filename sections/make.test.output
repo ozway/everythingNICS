@@ -1,0 +1,34 @@
+Running tests...
+Test project /home/lbrown/iel-2.0/EXTLIB/PSUADE/psuade_v1.7.2/build
+      Start  1: pdf1
+ 1/14 Test  #1: pdf1 .............................   Passed   24.91 sec
+      Start  2: pdf2
+ 2/14 Test  #2: pdf2 .............................   Passed   24.88 sec
+      Start  3: pdf3
+ 3/14 Test  #3: pdf3 .............................   Passed   24.94 sec
+      Start  4: pdf4
+ 4/14 Test  #4: pdf4 .............................   Passed   25.33 sec
+      Start  5: pdf5
+ 5/14 Test  #5: pdf5 .............................   Passed   24.87 sec
+      Start  6: pdf6
+ 6/14 Test  #6: pdf6 .............................   Passed   25.75 sec
+      Start  7: pdf7
+ 7/14 Test  #7: pdf7 .............................   Passed   24.79 sec
+      Start  8: ARSM1
+ 8/14 Test  #8: ARSM1 ............................   Passed    0.04 sec
+      Start  9: Bungee
+ 9/14 Test  #9: Bungee ...........................   Passed    0.76 sec
+      Start 10: Morris20MOAT
+10/14 Test #10: Morris20MOAT .....................   Passed    0.90 sec
+      Start 11: Morris20LH
+11/14 Test #11: Morris20LH .......................   Passed  144.31 sec
+      Start 12: MCMCTest
+12/14 Test #12: MCMCTest .........................   Passed    0.26 sec
+      Start 13: OptRosenbrockM
+13/14 Test #13: OptRosenbrockM ...................   Passed    0.89 sec
+      Start 14: MOO
+14/14 Test #14: MOO ..............................   Passed    0.01 sec
+
+100% tests passed, 0 tests failed out of 14
+
+Total Test time (real) = 322.64 sec

@@ -1,0 +1,32 @@
+PSUADE
+INPUT
+   dimension = 2
+   variable   1 x1 =   -4.00000000e+00   4.00000000e+00
+   variable   2 x2 =   -4.00000000e+00   4.00000000e+00
+#####    Inputs for the example given by PSUADE    #####
+##   variable   1 x1 =   4.00000000e+01   6.00000000e+01
+##   variable   2 x2 =   6.70000000e+01   7.40000000e+01
+##   variable   3 S =   2.00000000e+01   4.00000000e+01
+END
+OUTPUT
+   dimension = 1
+   variable   1 H
+END
+METHOD
+   sampling = MC
+   num_samples = 1000
+#  for other options, consult manual
+END
+APPLICATION
+   driver = ./simulator
+#   gen_inputfile_only
+#  driver = ./simulator.py
+END
+ANALYSIS
+#  for analyzer and optimization options, consult manual
+#  analyzer method = Moment
+#  analyzer method = MainEffect
+#  analyzer rstype = MARS
+   diagnostics 1
+END
+END

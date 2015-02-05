@@ -1,0 +1,30 @@
+We have done several examples with PSUADE.
+
+\subsection{make test}
+
+The most notable one, in my book, has been the "make test" command. PSUADE has 14 tests included with the package. They can be accessed by going into the build directory and typing
+
+\begin{verbatim}
+make test
+\end{verbatim}
+
+Along with any wrapper things you want to do like making it a background task or capturing the output.
+
+Here's how it looks when I run it. Your results may vary, but should probably only vary in runtimes, not in what succeeds and what doesn't.
+
+\verbatiminput{psuade/make.test.output}
+
+\subsection{Rosenbrock function}
+
+We also did analysis of the rosenbrock function, 
+
+$$f(x,y) = (1-x)^2 + 100(y-x^2)^2$$.
+
+The results themselves were not particularly relevant, but it worked as a proof-of-concept.
+
+
+\verbatiminput{psuade/psuade.in}
+
+\verbatiminput{psuade/rosenbrock.c}
+
+

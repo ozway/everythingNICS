@@ -1,0 +1,49 @@
+PSUADE has four major functions - Sensitivity Analysis, Uncertainty Quantification, Optimization, and Data Analysis.
+
+In general, PSUADE provides inputs to a simulation and compares it to the outputs from the simulation. It stores all of these results in a file, by default called psuadeData, which has all of the information about the inputs and the outputs. Generally, PSUADE will also output relevant information to the console that was requested by the user (for example, sensitivity analysis information).
+
+Additionally, in general, if you're looking for advice about PSUADE and how to run it, launch the psuade executable and type help, then help (topic).
+
+\begin{verbatim}
+[lbrown@star1 ~]$ iel-2.0/EXTLIB/PSUADE/psuade_v1.7.2/build/bin/psuade 
+**********************************************************************
+*      Welcome to PSUADE (version 1.7.2)
+**********************************************************************
+PSUADE - A Problem Solving environment for 
+         Uncertainty Analysis and Design Exploration (1.7.2)
+(for help, enter <help>)
+======================================================================
+psuade> help
+Help topics:
+	info         (information about the use of PSUADE)
+	io           (file read/write commands)
+	stat         (basic statistics)
+	screen       (parameter screening commands)
+	rs           (response surface analysis commands)
+	qsa          (quantitative sensitivity analysis commands)
+	calibration  (Bayesian calibration/optimization commands)
+	plot         (commands for generating visualization plots)
+	setup        (commands to set up PSUADE work flow)
+	edit         (commands to edit sample data in loal memory)
+	misc         (miscellaneous commands)
+	advanced     (advanced analysis and control commands)
+	<command -h> (help for a specific command)
+\end{verbatim}
+
+\subsection{Sensitivity Analysis / Uncertainty Quantification (SA / UQ)}
+
+For Sensitivity Analysis and Uncertainty Quantification, the code runs by generating all of the inputs at once, then running all of them in sequence. For these modes in particular, the code can actually generate all fo the inputs up front if you add "gen\_inputfile\_only" to the application section of the PSUADE input file.
+
+These sorts of algorithms work by making small, measured changes in the inputs to a function/simulation, then analyzing the resulting output. The exact nature of these algorithms is unnecessary to discuss here. In general, sensitivity analysis algorithms work by making small changes in various inputs for a simulation to judge the relative strength that each input has on the output of the simulation. Uncertainty analysis tends to revolve around making small changes in the input to see how much the output is successfully determined by the inputs.
+
+\subsection{Optimization}
+
+Optimization runs slightly different. The inputs of the next iteration are determined by the output of the previous iteration, in an effort to optimize some quality of the run. For example, if you measure the error or convergence of the results, by choosing to minimize this quality, the optimization algorithm will attempt to generate inputs that minimize the error or convergence.
+
+One thing we're interested in doing is using the optimization functions to minimize the runtimes of our codes. This has a clear purpose when running codes with a genetic algorithm or MCMC that run to convergence.
+
+\subsection{Data Analytics}
+
+PSUADE can also be used to analyze data. You can load psuadeData files in psuade by going into the PSUADE API (launching the PSUADE binary) and typing load (see ``psuade> help io" details). This allows you to generate plots (psuade> help plot), or do other forms of analysis (psuade> help rs or psuade> help qsa).
+
+We haven't done much with this, but its inclusion as a feature of psuade seems necessary to me.

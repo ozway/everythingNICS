@@ -1,0 +1,61 @@
+\subsection{Installing PSUADE}
+
+\subsubsection{General Steps}
+
+\begin{enumerate}
+\item tar xzvf PSUADE.tar.gz
+\item cd PSUADE\_1.7.2
+\item mkdir build; cd build
+\item cmake .. \&$>$ cmake.output \&
+
+(This step will take a minute or so.)
+
+\item make \&$>$ make.output \&
+
+(This step will take some time.)
+\end{enumerate}
+
+If the make is successful, build/bin should contain the psuade executable. Set \$PATH and \$LD\_LIBRARY\_PATH, based on your installation location. To test your build, change to your build directory and type ``make test".
+
+
+\subsubsection{Installing on Darter}
+
+\begin{enumerate}
+\item \textit{tar xzvf PSUADE.tar.gz}
+\item \textit{cd PSUADE\_1.7.2}
+\item \textit{mkdir build; cd build}
+\item \textit{cmake ..} \&$>$ \textit{cmake.output} \&
+\item {\bfseries Go to cmake\_install.cmake and change CMAKE\_INSTALL\_PREFIX from ``/usr/local/" to a directory where you have permission. }
+
+I used ``PSUADE\_v1.7.2/inst/"
+
+\item \textit{make} \&$>$ \textit{make.output} \&
+\end{enumerate}
+
+\subsubsection{Installing on star1}
+
+Note: Requires cmake, you may have to install a local copy.
+
+\begin{enumerate}
+\item \textit{tar xzvf PSUADE.tar.gz}
+\item \textit{cd PSUADE\_1.7.2}
+\item \textit{mkdir build; cd build}
+\item {\bfseries export LD\_LIBRARY\_PATH=}
+
+~~~~{\bfseries /home/kwong/LAPACK/lib-shared/:\$LD\_LIBRARY\_PATH}
+
+Alternatively, use another libblas.so, if you have one.
+\item \textit{cmake ..} \&$>$ \textit{cmake.output} \&
+\item {\bfseries Go to cmake\_install.cmake and change CMAKE\_INSTALL\_PREFIX from ``/usr/local/" to a directory where you have permission.}
+\item {\bfseries Go to CMakeCache.txt and change LAPACK\_lapack\_LIBRARY:FILEPATH to}
+		
+~~~~{\bfseries /home/kwong/LAPACK/lib-shared/liblapack.so}
+
+OR
+
+~~~~{\bfseries /home/lbrown/iel-2.0/EXTLIB/LAPACK/lapack-3.4.0-shared/liblapack.so}
+
+or to whatever liblapack.so you prefer
+
+\item \textit{make} \&$>$ \textit{make.output} \&
+\end{enumerate}

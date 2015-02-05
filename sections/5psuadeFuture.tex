@@ -1,0 +1,42 @@
+The next step is to implement PSUADE so that it can work in parallel with other simulations and modules. We also want PSUADE to use tuple communications instead of file I/O for its work.
+
+Fortunately, it appears we can do both at once. 
+
+\begin{verbatim}
+I don't know whether this will useful : there is a psuade option called
+'driver = psLocal' which will call a resident function inside psuade called
+psLocalFunction. If you have a fixed function, you can compile it in psuade.
+The psLocalFunction is in Src/DataIO/FunctionInterface.cpp.
+
+If you have a fixed function that you call, you can put it
+inside the psLocalFunction subroutine in Src/DataIO/FunctionInterface.cpp (that is,
+replace everything inside that function with your code).
+If you want to use your code every time a simulation is requested, you will
+instantiate FunctionInterface and then call loadFunctionData
+
+loadFunctionData(length, names)
+
+and you set length = 5
+and 
+names is a char**
+with names[0] = 'PSUADE_LOCAL';
+        names[1] = 'NONE'
+        names[2] = 'NONE'
+        names[3] = 'NONE'
+        names[4] = 'NONE'
+
+Then whenever you call FunctionInterface->evaluate, it will
+call your local function.
+\end{verbatim}
+
+It should be possible to substitute in the IEL\_tget function as the 'fixed function' that will be called. Then PSUADE can treat other modules as fitness functions.
+
+
+The next step will be to replace PSUADE's I/O function with IEL\_tput. This shoudln't be too difficult.
+
+\begin{verbatim}
+psuade_v1.7.2/Src/DataIO
+\end{verbatim}
+
+
+For the tput and tget changes to PSUADE, it should follow a similar process to the section in this document describing my changes to the main function.
